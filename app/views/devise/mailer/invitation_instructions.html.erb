@@ -750,7 +750,7 @@ body.outlook p {
                           <td>
                             <h1>Hi <%= @resource.name.split(/\s+/).first %>!</h1>
                             <p class="lead">
-                              We're super-glad you chose to participate in the RailsConf Scholarship program this year!
+                              We're super-glad you chose to participate in the RailsConf Scholarship program this year.
                             </p>
                             <p>
                               To help collect all the feedback that both Scholars and Guides might have to offer, we've made a <%= link_to 'RailsConf Scholarship', root_url %> app to help with the task.
@@ -771,11 +771,11 @@ body.outlook p {
                       <table class="twelve columns">
                         <tr>
                           <td class="panel">
-                            <p> We'd love it if you could give us some feedback about your experience with the Scholarship program.</p>
+                            <p> We'd love it if you tell us about your experience.</p>
                             <table class="button">
                               <tr>
                                 <td>
-                                  <%= link_to 'Give Feedback', accept_invitation_url(@resource, invitation_token: @token) %>
+                                  <%= link_to 'Signup to Give Feedback', accept_invitation_url(@resource, invitation_token: @token) %>
                                 </td>
                               </tr>
                             </table>

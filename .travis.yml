@@ -1,1 +1,8 @@
 script: script/ci.sh
+deploy:
+  provider: heroku
+  api_key:
+    secure: NuZ9lJaXPIvmSOxrx7FwwxHWuvBeqC/mjTB9COGy9bif4Z5VH+/TH/Pz1TBOQArw/kAPvPWxipVJXggY760rsQxKXs0mmK1w+K0bgleNRIGFahszYJfcanl6G7w/TrCpVE/ko5C6R0VLPGa2y5TZadKtkJN8I68MbLBUdyz8zgQ=
+  app: rubycentral-guides
+  on:
+    repo: minifast/guides

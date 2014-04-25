@@ -23,9 +23,13 @@ Run the Rails server:
 
 Then visit [http://localhost:3000](http://localhost:3000).
 
+## Deployment
+
+Set the `RAILS_MAILER_HOST` environment variable to get mails sending correctly.
+
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/matching-machine/fork )
+1. Fork it ( https://github.com/minifast/guides/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

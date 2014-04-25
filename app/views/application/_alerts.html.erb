@@ -1,0 +1,15 @@
+<% if notice.present? || alert.present?%>
+  <% if notice.present? %>
+    <div data-alert class="alert-box">
+      <%= notice   %>
+      <a href="#" class="close">&times;</a>
+    </div>
+  <% end %>
+
+  <% if alert.present? %>
+    <div data-alert class="alert-box warning">
+      <%= alert %>
+      <a href="#" class="close">&times;</a>
+    </div>
+  <% end %>
+<% end %>

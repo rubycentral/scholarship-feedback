@@ -12,8 +12,8 @@ describe 'Leaving feedback' do
 
       click_link 'Leave Feedback for Tourism is Cool'
 
-      fill_in 'Testimonial', with: 'this was great'
-      fill_in 'Private feedback', with: "I didn't even see my scholar"
+      fill_in 'Your Story', with: 'this was great'
+      fill_in 'Private Comments', with: "I didn't even see my scholar"
       click_button 'Create Feedback'
 
       expect(page).to have_content('Thanks for leaving your feedback!')
@@ -30,8 +30,8 @@ describe 'Leaving feedback' do
 
       click_link 'Leave Feedback for Dogs and Cats'
 
-      fill_in 'Testimonial', with: 'i like both dogs and cats'
-      fill_in 'Private feedback', with: 'i love pork'
+      fill_in 'Your Story', with: 'i like both dogs and cats'
+      fill_in 'Private Comments', with: 'i love pork'
       click_button 'Create Feedback'
 
       expect(page).to have_content('Thanks for leaving your feedback!')

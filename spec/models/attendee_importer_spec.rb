@@ -41,6 +41,11 @@ describe AttendeeImporter do
       it 'creates a guide' do
         expect { importer.save }.to change(Guide, :count).by(1)
       end
+
+      it 'sets the scholar for the guide' do
+        importer.save
+        expect(Guide.last.scholar).to eq(Scholar.last)
+      end
     end
 
     context 'with multiple guides' do
@@ -61,6 +66,20 @@ describe AttendeeImporter do
       it 'does not create a scholar' do
         expect { importer.save }.not_to change(Scholar, :count)
       end
+    end
+  end
+
+  describe '.import_file' do
+    it 'creates a scholar' do
+      expect {
+        AttendeeImporter.import_file(Rails.root.join('spec/support/fixtures/attendee.csv'))
+      }.to change(Scholar, :count).by(1)
+    end
+
+    it 'creates a guide' do
+      expect {
+        AttendeeImporter.import_file(Rails.root.join('spec/support/fixtures/attendee.csv'))
+      }.to change(Guide, :count).by(1)
     end
   end
 end

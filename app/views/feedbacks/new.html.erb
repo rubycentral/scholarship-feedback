@@ -1,9 +1,49 @@
-<%= form_for(@feedback) do |f| %>
-  <%= f.label :testimonial %>
-  <%= f.text_area :testimonial %>
+<div class="row">
+  <div class="small-12 columns">
+    <h2>Let us know what you think!</h2>
 
-  <%= f.label :private_feedback %>
-  <%= f.text_area :private_feedback %>
+    <p>
+      You're the most important part of the RailsConf Scholarship program.  Your experiences will help us tweak and improve the process for the next group of Scholars and Guides.  We'll ask for your permission before we use your comments.
+    </p>
 
-  <%= f.submit %>
-<% end %>
+    <%= form_for(@feedback) do |f| %>
+      <div class="row">
+        <div class="small-3 columns">
+          <%= f.label :testimonial, 'Your Story', class: 'right inline' %>
+        </div>
+        <div class="small-9 columns">
+          <%= f.text_area :testimonial, rows: 5, autofocus: true %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-push-3 small-9 columns">
+          <p>
+            If you had a great time, we'd love to share your experiences with everyone considering the Scholarship program next year.
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="small-3 columns">
+          <%= f.label :private_feedback, 'Private Comments', class: 'right inline' %>
+        </div>
+        <div class="small-9 columns">
+          <%= f.text_area :private_feedback, rows: 5 %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-push-3 small-9 columns">
+          <p>
+            If you've got feedback for us that you'd rather express confidentially, we'd love to know.  Private feedback will never be shared outside the RubyCentral team.
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="small-push-3 small-9 columns">
+          <%= f.submit class: 'button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

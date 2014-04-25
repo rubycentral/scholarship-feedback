@@ -1,7 +1,29 @@
-<% if current_attendee.present? %>
-  <% if current_attendee.guide? %>
-    <%= link_to("Leave Feedback for #{current_attendee.scholar_name}", new_feedback_path) %>
-  <% elsif current_attendee.scholar? %>
-    <%= link_to("Leave Feedback for #{current_attendee.guide_names.join(' and ')}", new_feedback_path) %>
+<div class="row">
+  <div class="small-12 columns">
+    <h1>RailsConf 2014</h1>
+
+    <p>
+      Thanks for participating in the RailsConf Scholarship program.  We really hope you enjoyed being a Guide or Scholar.
+    </p>
+
+    <p>
+      If you were a Scholar and felt like you got something out of this year, consider becoming a Guide next year!
+    </p>
+  </div>
+</div>
+
+<% if attendee_signed_in? %>
+<div class="row">
+  <div class="small-12 columns">
+  <% if current_attendee.feedback.blank? %>
+    <% if current_attendee.guide? %>
+      <%= link_to("Leave Feedback for #{current_attendee.scholar_name}", new_feedback_path, class: 'button') %>
+    <% elsif current_attendee.scholar? %>
+      <%= link_to("Leave Feedback for #{current_attendee.guide_names.join(' and ')}", new_feedback_path, class: 'button') %>
+    <% end %>
+  <% else %>
+    <h2>Thanks for leaving feedback!</h2>
   <% end %>
+  </div>
+</div>
 <% end %>

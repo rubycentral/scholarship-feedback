@@ -13,6 +13,10 @@ Set up the database:
     $ cp config/database.yml.example config/database.yml
     $ rake db:setup
 
+Import the attendees:
+
+    $ rake import:attendees
+
 Run the Rails server:
 
     $ rails s

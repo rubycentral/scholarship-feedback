@@ -9,32 +9,46 @@ class AttendeeImporter < Struct.new(:content)
     end
 
     def first_guide
-      guide = Guide.find_or_initialize_by(name: row[:guide_1_name], email: row[:guide_1_email], scholar: scholar)
+      guide = Guide.find_or_initialize_by(name: row[:guide_1_name], email: row[:guide_1_email])
+      guide.scholar = scholar
       guide.password = guide.password_confirmation = SecureRandom.base64 unless guide.id
       guide
     end
 
     def second_guide
-      guide = Guide.find_or_initialize_by(name: row[:guide_2_name], email: row[:guide_2_email], scholar: scholar)
+      guide = Guide.find_or_initialize_by(name: row[:guide_2_name], email: row[:guide_2_email])
+      guide.scholar = scholar
       guide.password = guide.password_confirmation = SecureRandom.base64 unless guide.id
       guide
     end
 
     def valid?
-      to_a.all?(&:valid?)
+      if has_second_guide?
+        scholar.valid? && first_guide.valid? && second_guide.valid?
+      else
+        scholar.valid? && first_guide.valid?
+      end
     end
 
     def save
-      to_a.each(&:save)
+      scholar.save!
+      first_guide.scholar = scholar
+      first_guide.save!
+      if has_second_guide?
+        second_guide.scholar = scholar
+        second_guide.save!
+      end
     end
 
     protected
 
-    def to_a
-      attendees = [scholar, first_guide]
-      attendees << second_guide if row[:guide_2_name].present? || row[:guide_2_email].present?
-      attendees
+    def has_second_guide?
+      row[:guide_2_name].present? || row[:guide_2_email].present?
     end
+  end
+
+  def self.import_file(path)
+    new(File.read(path)).save
   end
 
   def has_valid_headers?

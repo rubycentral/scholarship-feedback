@@ -1,0 +1,7 @@
+<% if current_attendee.present? %>
+  <% if current_attendee.guide? %>
+    <%= link_to("Leave Feedback for #{current_attendee.scholar_name}", new_feedback_path) %>
+  <% elsif current_attendee.scholar? %>
+    <%= link_to("Leave Feedback for #{current_attendee.guide_names.join(' and ')}", new_feedback_path) %>
+  <% end %>
+<% end %>

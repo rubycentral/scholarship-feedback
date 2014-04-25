@@ -1,0 +1,9 @@
+<%= form_for(@feedback) do |f| %>
+  <%= f.label :testimonial %>
+  <%= f.text_area :testimonial %>
+
+  <%= f.label :private_feedback %>
+  <%= f.text_area :private_feedback %>
+
+  <%= f.submit %>
+<% end %>

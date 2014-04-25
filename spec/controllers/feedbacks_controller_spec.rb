@@ -25,14 +25,34 @@ describe FeedbacksController do
 
       before { sign_in(scholar) }
 
+      context 'when the attendee has already left feedback' do
+        before { create(:feedback, attendee: scholar) }
+
+        it 'does not create a new feedback' do
+          expect {
+            make_request
+          }.not_to change(Feedback, :count)
+        end
+
+        context 'when making the request' do
+          before { make_request }
+
+          its(:response) { should redirect_to(root_path) }
+
+          it 'sets the notice to a thank you message' do
+            expect(flash[:notice]).to include('Thanks for leaving your feedback!')
+          end
+        end
+      end
+
       context 'with valid params' do
-        it 'creates a new feedback sent by the sender' do
+        it 'creates a new feedback' do
           expect {
             make_request
           }.to change(Feedback, :count).by(1)
         end
 
-        it 'creates a new feedback for the reciever' do
+        it 'creates a new feedback for the attendee' do
           expect{
             make_request
           }.to change { scholar.reload.feedback }.from(nil)

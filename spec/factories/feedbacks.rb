@@ -12,7 +12,7 @@
 
 FactoryGirl.define do
   factory :feedback do
-    attendee
+    attendee { create(:scholar) }
     testimonial { Faker::Company.bs }
     private_feedback { Faker::Company.bs }
   end

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.0'
 gem 'devise'
+gem 'devise_invitable'
 gem 'pg'
 
 gem 'foundation-rails'

@@ -1,4 +1,6 @@
 class FeedbacksController < ApplicationController
+  before_action :authenticate_attendee!
+
   def new
     @feedback = Feedback.new
   end

@@ -1,17 +1,32 @@
 require 'spec_helper'
 
 describe FeedbacksController do
+  let(:scholar) { create(:scholar) }
+
   describe 'GET #new' do
     def make_request
       get :new
     end
 
-    before { make_request }
+    context 'when not signed in' do
+      before do
+        make_request
+      end
 
-    its(:response) { should be_success }
+      its(:response) { should redirect_to(new_attendee_session_path) }
+    end
 
-    it 'assigns a new Feedback' do
-      expect(assigns(:feedback)).to be
+    context 'when signed in' do
+      before do
+        sign_in(scholar)
+        make_request
+      end
+
+      its(:response) { should be_success }
+
+      it 'assigns a new Feedback' do
+        expect(assigns(:feedback)).to be
+      end
     end
   end
 
@@ -20,10 +35,24 @@ describe FeedbacksController do
       post :create, params
     end
 
-    context 'when signed in' do
-      let(:scholar) { create(:scholar) }
+    context 'when not signed in' do
+      before do
+        make_request
+      end
 
+      its(:response) { should redirect_to(new_attendee_session_path) }
+    end
+
+    context 'when signed in' do
       before { sign_in(scholar) }
+
+      context 'with invalid params' do
+        it 'blows up' do
+          expect {
+            make_request(attendee_id: 0, feedback: {})
+          }.to raise_error
+        end
+      end
 
       context 'when the attendee has already left feedback' do
         before { create(:feedback, attendee: scholar) }
@@ -67,14 +96,6 @@ describe FeedbacksController do
             expect(flash[:notice]).to include('Thanks for leaving your feedback!')
           end
         end
-      end
-    end
-
-    context 'with invalid params' do
-      it 'blows up' do
-        expect {
-          make_request(attendee_id: 0, feedback: {})
-        }.to raise_error
       end
     end
   end

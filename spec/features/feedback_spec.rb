@@ -5,7 +5,7 @@ describe 'Leaving feedback' do
   let!(:guide) { create(:guide, scholar: scholar, name: 'Dogs') }
 
   context 'as a guide' do
-    before { login_as guide }
+    before { login_as(guide, scope: :attendee) }
 
     it 'lets the guide enter a comment' do
       visit root_path
@@ -23,7 +23,7 @@ describe 'Leaving feedback' do
   context 'as a scholar' do
     let!(:other_guide) { create(:guide, scholar: scholar, name: 'Cats') }
 
-    before { login_as scholar }
+    before { login_as(scholar, scope: :attendee) }
 
     it 'lets the scholar enter a comment' do
       visit root_path

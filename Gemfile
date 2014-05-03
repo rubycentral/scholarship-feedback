@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.0'
+gem 'rails_admin'
 gem 'devise'
 gem 'devise_invitable'
 gem 'pg'

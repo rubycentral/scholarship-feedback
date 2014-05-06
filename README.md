@@ -1,6 +1,6 @@
-# RailsConf Guides [![Build Status](https://travis-ci.org/minifast/guides.svg)](https://travis-ci.org/minifast/guides) [![Code Climate](https://codeclimate.com/github/minifast/guides.png)](https://codeclimate.com/github/minifast/guides)
+# RailsConf Scholarship Feedback [![Build Status](https://travis-ci.org/rubycentral/scholarship-feedback.svg)](https://travis-ci.org/rubycentral/scholarship-feedback) [![Code Climate](https://codeclimate.com/github/rubycentral/scholarship-feedback.png)](https://codeclimate.com/github/rubycentral/scholarship-feedback)
 
-A site for RailsConf 2014 Scholars and Guides.
+A site for RailsConf 2014 Scholars and Guides to register and leave feedback about their experience.
 
 ## Setup
 

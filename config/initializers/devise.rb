@@ -9,4 +9,5 @@ Devise.setup do |config|
   config.password_length = 8..128
   config.reset_password_within = 6.hours
   config.sign_out_via = :delete
+  config.omniauth :twitter, ENV['TWITTER_APP_ID'], ENV['TWITTER_APP_SECRET']
 end

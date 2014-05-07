@@ -26,6 +26,8 @@
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
 #  invitations_count      :integer          default(0)
+#  provider               :string(255)
+#  uid                    :string(255)
 #
 # Indexes
 #
@@ -39,6 +41,8 @@
 class Attendee < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :recoverable, :rememberable, :trackable,
          :validatable
+
+  devise :omniauthable, :omniauth_providers => [:twitter]
 
   has_one :feedback
 

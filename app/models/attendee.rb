@@ -4,8 +4,6 @@
 #
 #  id                     :integer          not null, primary key
 #  name                   :string(255)      default(""), not null
-#  type                   :string(255)      not null
-#  scholar_id             :integer
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default("")
 #  reset_password_token   :string(255)
@@ -28,6 +26,7 @@
 #  invitations_count      :integer          default(0)
 #  provider               :string(255)
 #  uid                    :string(255)
+#  type                   :string(255)
 #
 # Indexes
 #
@@ -44,13 +43,11 @@ class Attendee < ActiveRecord::Base
 
   devise :omniauthable, :omniauth_providers => [:twitter]
 
-  has_one :feedback
+  has_many :feedbacks
+  has_many :scholarships
+  has_many :scholarship_guides
 
-  def guide?
-    false
-  end
-
-  def scholar?
-    false
+  def has_feedback?
+    self.feedbacks.present?
   end
 end

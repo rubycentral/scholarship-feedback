@@ -4,8 +4,6 @@
 #
 #  id                     :integer          not null, primary key
 #  name                   :string(255)      default(""), not null
-#  type                   :string(255)      not null
-#  scholar_id             :integer
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default("")
 #  reset_password_token   :string(255)
@@ -28,6 +26,7 @@
 #  invitations_count      :integer          default(0)
 #  provider               :string(255)
 #  uid                    :string(255)
+#  type                   :string(255)
 #
 # Indexes
 #
@@ -41,8 +40,20 @@
 require 'spec_helper'
 
 describe Attendee do
-  it { should have_one(:feedback) }
+  it { should have_many(:feedbacks) }
+  it { should have_many(:scholarships) }
+  it { should have_many(:scholarship_guides) }
 
-  it { should_not be_guide }
-  it { should_not be_scholar }
+  describe '#has_feedback?' do
+    subject(:attendee) { create(:attendee) }
+
+    context 'when there is no feedback' do
+      it { should_not have_feedback }
+    end
+
+    context 'when there is feedback' do
+      before { create(:feedback, attendee: attendee) }
+      it { should have_feedback }
+    end
+  end
 end

@@ -6,7 +6,7 @@ class FeedbacksController < ApplicationController
   end
 
   def create
-    current_attendee.create_feedback!(feedback_params) unless current_attendee.feedback.present?
+    current_attendee.feedbacks.create!(feedback_params) unless current_attendee.has_feedback?
     redirect_to(root_path, notice: "Thanks for leaving your feedback!")
   end
 

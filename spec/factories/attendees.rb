@@ -4,8 +4,6 @@
 #
 #  id                     :integer          not null, primary key
 #  name                   :string(255)      default(""), not null
-#  type                   :string(255)      not null
-#  scholar_id             :integer
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default("")
 #  reset_password_token   :string(255)
@@ -28,6 +26,7 @@
 #  invitations_count      :integer          default(0)
 #  provider               :string(255)
 #  uid                    :string(255)
+#  type                   :string(255)
 #
 # Indexes
 #
@@ -39,18 +38,22 @@
 #
 
 FactoryGirl.define do
-  factory :scholar do
+  factory :attendee do
     name { Faker::Name.name }
     email { Faker::Internet.email }
     password { SecureRandom.base64 }
     password_confirmation { password }
-  end
 
-  factory :guide do
-    scholar
-    name { Faker::Name.name }
-    email { Faker::Internet.email }
-    password { SecureRandom.base64 }
-    password_confirmation { password }
+    factory :guide do
+      after(:create) do |attendee|
+        create(:scholarship_guide, attendee: attendee)
+      end
+    end
+
+    factory :scholar do
+      after(:create) do |attendee|
+        create(:scholarship, attendee: attendee)
+      end
+    end
   end
 end

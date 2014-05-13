@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506232906) do
+ActiveRecord::Schema.define(version: 20140513192255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,8 +32,6 @@ ActiveRecord::Schema.define(version: 20140506232906) do
 
   create_table "attendees", force: true do |t|
     t.string   "name",                   default: "", null: false
-    t.string   "type",                                null: false
-    t.integer  "scholar_id"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
@@ -64,10 +62,37 @@ ActiveRecord::Schema.define(version: 20140506232906) do
   add_index "attendees", ["invited_by_id"], name: "index_attendees_on_invited_by_id", using: :btree
   add_index "attendees", ["reset_password_token"], name: "index_attendees_on_reset_password_token", unique: true, using: :btree
 
+  create_table "events", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "feedbacks", force: true do |t|
     t.integer  "attendee_id",      null: false
     t.text     "testimonial"
     t.text     "private_feedback"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "event_id",         null: false
+  end
+
+  create_table "scholarship_guides", force: true do |t|
+    t.integer  "attendee_id",                    null: false
+    t.integer  "event_id",                       null: false
+    t.integer  "scholarship_id"
+    t.boolean  "approved",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "scholarships", force: true do |t|
+    t.integer  "attendee_id",                 null: false
+    t.integer  "event_id",                    null: false
+    t.boolean  "approved",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
